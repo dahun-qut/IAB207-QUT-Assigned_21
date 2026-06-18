@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Event - EventHub{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8 offset-md-2">
+        <h1>Edit Event</h1>
+        <p class="text-muted">Update your event details</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-sm">
+            <div class="card-body p-5">
+                <form method="POST" action="{{ url_for('views.edit_event', event_id=event.id) }}" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <h5 class="mb-3">Event Details</h5>
+                    
+                    <div class="mb-3">
+                        {{ form.title.label(class="form-label") }}
+                        {{ form.title(class="form-control") }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label") }}
+                        {{ form.description(class="form-control", rows="5") }}
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.category.label(class="form-label") }}
+                                {{ form.category(class="form-select") }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.date.label(class="form-label") }}
+                                {{ form.date(class="form-control") }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.location.label(class="form-label") }}
+                                {{ form.location(class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.image.label(class="form-label") }}
+                                {{ form.image(class="form-control") }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.price.label(class="form-label") }}
+                                {{ form.price(class="form-control", step="0.01") }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.tickets_available.label(class="form-label") }}
+                                {{ form.tickets_available(class="form-control") }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+
+                    <h5 class="mb-3">Acknowledgement of Country</h5>
+                    
+                    <div class="mb-3">
+                        {{ form.acknowledgement_type.label(class="form-label") }}
+                        {{ form.acknowledgement_type(class="form-select") }}
+                    </div>
+                    
+                    <div id="ack-fields" style="display: none;">
+                        <div class="mb-3">
+                            {{ form.acknowledgement_location.label(class="form-label") }}
+                            {{ form.acknowledgement_location(class="form-control") }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form.acknowledgement_text.label(class="form-label") }}
+                            {{ form.acknowledgement_text(class="form-control", rows="4") }}
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="d-flex gap-2">
+                        {{ form.submit(class="btn btn-primary", value="Update Event") }}
+                        <a href="{{ url_for('views.event_details', event_id=event.id) }}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ackType = document.querySelector('[name="acknowledgement_type"]');
+    const ackFields = document.getElementById('ack-fields');
+    
+    function toggleAckFields() {
+        if (ackType.value !== 'None') {
+            ackFields.style.display = 'block';
+        } else {
+            ackFields.style.display = 'none';
+        }
+    }
+    
+    ackType.addEventListener('change', toggleAckFields);
+    toggleAckFields();
+</script>
+{% endblock %}

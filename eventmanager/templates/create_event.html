@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Create Event - EventHub{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8 offset-md-2">
+        <h1>Create New Event</h1>
+        <p class="text-muted">Fill in the details below to create your event</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow-sm">
+            <div class="card-body p-5">
+                <form method="POST" action="{{ url_for('views.create_event') }}" novalidate>
+                    {{ form.hidden_tag() }}
+                    
+                    <h5 class="mb-3">Event Details</h5>
+                    
+                    <div class="mb-3">
+                        {{ form.title.label(class="form-label") }}
+                        {% if form.title.errors %}
+                            {{ form.title(class="form-control is-invalid") }}
+                            <div class="invalid-feedback d-block">{% for e in form.title.errors %}{{ e }}{% endfor %}</div>
+                        {% else %}
+                            {{ form.title(class="form-control", placeholder="Enter event title") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label") }}
+                        {% if form.description.errors %}
+                            {{ form.description(class="form-control is-invalid", rows="5") }}
+                            <div class="invalid-feedback d-block">{% for e in form.description.errors %}{{ e }}{% endfor %}</div>
+                        {% else %}
+                            {{ form.description(class="form-control", rows="5", placeholder="Describe your event in detail") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.category.label(class="form-label") }}
+                                {{ form.category(class="form-select") }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.date.label(class="form-label") }}
+                                {% if form.date.errors %}
+                                    {{ form.date(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback d-block">{% for e in form.date.errors %}{{ e }}{% endfor %}</div>
+                                {% else %}
+                                    {{ form.date(class="form-control", placeholder="YYYY-MM-DD HH:MM") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.location.label(class="form-label") }}
+                                {{ form.location(class="form-control", placeholder="Event location") }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.image.label(class="form-label") }}
+                                {{ form.image(class="form-control", placeholder="Image URL (optional)") }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.price.label(class="form-label") }}
+                                {% if form.price.errors %}
+                                    {{ form.price(class="form-control is-invalid", step="0.01") }}
+                                    <div class="invalid-feedback d-block">{% for e in form.price.errors %}{{ e }}{% endfor %}</div>
+                                {% else %}
+                                    {{ form.price(class="form-control", step="0.01", placeholder="0.00") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.tickets_available.label(class="form-label") }}
+                                {% if form.tickets_available.errors %}
+                                    {{ form.tickets_available(class="form-control is-invalid", min="1") }}
+                                    <div class="invalid-feedback d-block">{% for e in form.tickets_available.errors %}{{ e }}{% endfor %}</div>
+                                {% else %}
+                                    {{ form.tickets_available(class="form-control", min="1", placeholder="100") }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    <h5 class="mb-3">Acknowledgement of Country</h5>
+                    <p class="text-muted small mb-3">
+                        Acknowledging Traditional Custodians is an important practice at Australian events.
+                        <a href="{{ url_for('views.about_acknowledgement') }}" target="_blank">Learn more</a>
+                    </p>
+                    
+                    <div class="mb-3">
+                        {{ form.acknowledgement_type.label(class="form-label") }}
+                        {{ form.acknowledgement_type(class="form-select") }}
+                    </div>
+                    
+                    <div id="ack-fields" style="display: none;">
+                        <div class="mb-3">
+                            {{ form.acknowledgement_location.label(class="form-label") }}
+                            {{ form.acknowledgement_location(class="form-control", placeholder="e.g., Brisbane, Queensland") }}
+                            <small class="text-muted">This helps identify the appropriate Traditional Custodians</small>
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form.acknowledgement_text.label(class="form-label") }}
+                            {{ form.acknowledgement_text(class="form-control", rows="4", placeholder="Your acknowledgement statement...") }}
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <div class="d-flex gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                        <a href="{{ url_for('views.index') }}" class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const ackType = document.querySelector('[name="acknowledgement_type"]');
+    const ackFields = document.getElementById('ack-fields');
+    
+    function toggleAckFields() {
+        if (ackType.value !== 'None') {
+            ackFields.style.display = 'block';
+        } else {
+            ackFields.style.display = 'none';
+        }
+    }
+    
+    ackType.addEventListener('change', toggleAckFields);
+    toggleAckFields();
+</script>
+{% endblock %}

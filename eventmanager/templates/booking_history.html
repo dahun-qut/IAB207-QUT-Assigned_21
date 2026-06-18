@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookings - EventHub{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1>My Bookings</h1>
+        <p class="text-muted">View all your event bookings and order details</p>
+    </div>
+</div>
+
+{% if bookings %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Event</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Tickets</th>
+                    <th>Total Price</th>
+                    <th>Booking Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>
+                            <code class="bg-light p-2 rounded">{{ booking.order_id }}</code>
+                        </td>
+                        <td>
+                            <strong>{{ booking.event.title }}</strong><br>
+                            <small class="text-muted">{{ booking.event.category }}</small>
+                        </td>
+                        <td>{{ booking.event.date.strftime('%Y-%m-%d %H:%M') }}</td>
+                        <td>{{ booking.event.location }}</td>
+                        <td><span class="badge bg-primary">{{ booking.quantity }}</span></td>
+                        <td><strong>${{ "%.2f"|format(booking.total_price) }}</strong></td>
+                        <td>{{ booking.booking_date.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <a href="{{ url_for('views.event_details', event_id=booking.event.id) }}" class="btn btn-sm btn-outline-primary">
+                                View Event
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="alert alert-info mt-3">
+        <strong>Note:</strong> Keep your Order ID for your records. You may need it for event check-in.
+    </div>
+{% else %}
+    <div class="alert alert-info">
+        You haven't booked any events yet. <a href="{{ url_for('views.index') }}">Browse events</a> to get started!
+    </div>
+{% endif %}
+{% endblock %}

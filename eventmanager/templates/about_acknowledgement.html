@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block title %}Acknowledgement of Country - EventHub{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h1>Acknowledgement of Country</h1>
+        <p class="text-muted">Understanding a meaningful practice for reconciliation</p>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">What is an Acknowledgement of Country?</h5>
+                <p>An Acknowledgement of Country is a formal recognition of the Traditional Custodians and their
+                    continuing connection to the land where an event is held. It is an important practice that:</p>
+                <ul>
+                    <li>Recognizes Indigenous peoples' enduring connection to Country</li>
+                    <li>Demonstrates respect and cultural awareness</li>
+                    <li>Plays an important role in reconciliation and truth-telling</li>
+                    <li>Acknowledges that events occur on unceded or stolen land in most cases</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Acknowledgement vs. Welcome to Country</h5>
+                <p><strong>Acknowledgement of Country:</strong> A statement made by non-Indigenous people, recognizing
+                    Traditional Custodians</p>
+                <p><strong>Welcome to Country:</strong> A ceremonial welcome performed by an Indigenous person from the
+                    Traditional Custodians of that Country. This is a privilege, not a right, and should be formally
+                    invited.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Types of Acknowledgement Available</h5>
+
+                <div class="mb-3">
+                    <h6 class="bg-light p-2 rounded">No Acknowledgement</h6>
+                    <p>Your event will not include an acknowledgement.</p>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="bg-light p-2 rounded">Generic Acknowledgement</h6>
+                    <p>A general, non-specific acknowledgement of Traditional Custodians. Example:</p>
+                    <blockquote class="blockquote">
+                        "We acknowledge the Traditional Custodians of the land on which this event is held and pay our
+                        respects to their Elders past, present, and emerging."
+                    </blockquote>
+                </div>
+
+                <div class="mb-3">
+                    <h6 class="bg-light p-2 rounded">Enhanced Acknowledgement</h6>
+                    <p>A specific acknowledgement that names the Traditional Custodians of the event's location. This
+                        requires research and demonstrates greater cultural respect.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Why Acknowledgement Matters</h5>
+                <ul>
+                    <li><strong>Recognition:</strong> It acknowledges the continuing connection of Indigenous peoples to
+                        Country</li>
+                    <li><strong>Respect:</strong> It shows respect for Indigenous cultures and perspectives</li>
+                    <li><strong>Reconciliation:</strong> It is a step towards truth-telling and healing</li>
+                    <li><strong>Responsibility:</strong> Event organizers take responsibility for acknowledging the
+                        land's history</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Traditional Custodians of Australian Cities</h5>
+                <p class="text-muted small">These are approximate guides. Always do your own research for your specific
+                    location.</p>
+
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>City</th>
+                                <th>Traditional Custodians</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for city, custodian in custodians.items() %}
+                            <tr>
+                                <td><strong>{{ city }}</strong></td>
+                                <td>{{ custodian }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        < <div class="card-body">
+            <h5 class="card-title">Common Mistakes to Avoid</h5>
+            <div class="alert alert-warning mb-0">
+                <ul class="mb-0">
+                    <li><strong>Being Tokenistic:</strong> Don't use acknowledgement as a "tick box" exercise. It should
+                        be meaningful.</li>
+                    <li><strong>Inaccurate Names:</strong> Always verify the correct names of Traditional Custodians.
+                        Mispronunciation or incorrect names are disrespectful.</li>
+                    <li><strong>Vague Language:</strong> Avoid generic "Indigenous peoples" when you can name specific
+                        groups.</li>
+                    <li><strong>No Follow-up:</strong> An acknowledgement should be backed by genuine action toward
+                        reconciliation.</li>
+                    <li><strong>Performative without Action:</strong> If you're acknowledging Traditional Custodians,
+                        consider how you can support them (e.g., hiring Indigenous speakers, supporting Indigenous
+                        causes).</li>
+                </ul>
+            </div>
+    </div>
+</div>
+
+<!-- Resources -->
+< <div class="card-body">
+    <h5 class="card-title">Reliable Resources for Research</h5>
+    <ul>
+        <li><strong>AIATSIS (Australian Institute of Aboriginal and Torres Strait Islander Studies):</strong> Provides
+            comprehensive information on Indigenous groups and their Countries</li>
+        <li><strong>Local Council/Shire Websites:</strong> Often have information about Traditional Custodians</li>
+        <li><strong>National Native Title Tribunal:</strong> Searchable database of Native Title claims</li>
+        <li><strong>UNESCO - Intangible Cultural Heritage:</strong> Information on Indigenous knowledge and practices
+        </li>
+        <li><strong>Contact Local Indigenous Communities:</strong> When possible, reach out directly for guidance</li>
+    </ul>
+    </div>
+    </div>
+
+    < <div class="card-body">
+        <h5 class="card-title">Tips for Creating a Meaningful Acknowledgement</h5>
+        <ol>
+            <li><strong>Research:</strong> Spend time learning about the Traditional Custodians of your location</li>
+            <li><strong>Be Specific:</strong> Name the specific group(s) if possible</li>
+            <li><strong>Use Correct Pronunciation:</strong> Learn how to pronounce names correctly</li>
+            <li><strong>Show Connection to Land:</strong> Mention the specific Country or place name if known</li>
+            <li><strong>Demonstrate Respect:</strong> Use respectful language and acknowledge their ongoing role</li>
+            <li><strong>Back It Up:</strong> Accompany acknowledgement with action (hiring, donations, learning
+                opportunities)</li>
+            <li><strong>Continuously Learn:</strong> Reconciliation is an ongoing journey of learning</li>
+        </ol>
+        </div>
+        </div>
+
+        <div class="alert alert-info mb-4">
+            <strong>Note:</strong> This information is provided as an educational resource for university students.
+            Always do your own research and consult with local Indigenous communities for guidance specific to your
+            location.
+        </div>
+
+        <a href="{{ url_for('views.index') }}" class="btn btn-outline-secondary mb-4">&larr; Back to Events</a>
+        </div>
+        </div>
+        {% endblock %}
