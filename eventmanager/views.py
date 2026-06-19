@@ -10,8 +10,15 @@ views = Blueprint('views', __name__)
 
 
 @views.route('/')
-@views.route('/index')
 def index():
+    # Redirect unauthenticated users to login
+    if not current_user.is_authenticated:
+        return redirect(url_for('auth.login'))
+    return browse_events()
+
+@views.route('/index')
+@login_required
+def browse_events():
     category = request.args.get('category', 'all')
     search = request.args.get('search', '').strip()
     
@@ -133,7 +140,7 @@ def cancel_event(event_id):
     db.session.commit()
     
     flash('Event cancelled', 'info')
-    return redirect(url_for('views.index'))
+    return redirect(url_for('views.browse_events'))
 
 
 @views.route('/event/<int:event_id>')

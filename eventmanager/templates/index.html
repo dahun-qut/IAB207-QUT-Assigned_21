@@ -14,7 +14,7 @@
     <div class="col-md-12">
         <div class="card bg-light border-0">
             <div class="card-body p-4">
-                <form method="GET" action="{{ url_for('views.index') }}" class="row g-2">
+                <form method="GET" action="{{ url_for('views.browse_events') }}" class="row g-2">
                     <div class="col-md-6">
                         <input type="text" name="search" class="form-control" placeholder="Search events by name, location, or description..." value="{{ search_query }}">
                     </div>
@@ -104,7 +104,7 @@
 {% else %}
     <div class="alert alert-info text-center">
         <h5>No events found</h5>
-        <p class="mb-0">Try adjusting your filters or <a href="{{ url_for('views.index') }}">view all events</a></p>
+        <p class="mb-0">Try adjusting your filters or <a href="{{ url_for('views.browse_events') }}">view all events</a></p>
     </div>
 {% endif %}
 {% endblock %}

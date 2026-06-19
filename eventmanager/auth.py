@@ -11,7 +11,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('views.index'))
+        return redirect(url_for('views.browse_events'))
     
     form = RegisterForm()
     if form.validate_on_submit():
@@ -41,7 +41,7 @@ def register():
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('views.index'))
+        return redirect(url_for('views.browse_events'))
     
     form = LoginForm()
     if form.validate_on_submit():
@@ -50,7 +50,7 @@ def login():
         if user and check_password_hash(user.password_hash, form.password.data):
             login_user(user, remember=form.remember_me.data)
             flash(f'Welcome back, {user.first_name}!', 'success')
-            return redirect(url_for('views.index'))
+            return redirect(url_for('views.browse_events'))
         else:
             flash('Invalid email or password', 'danger')
     
@@ -63,4 +63,4 @@ def logout():
     """User logout"""
     logout_user()
     flash('You have been logged out.', 'info')
-    return redirect(url_for('views.index'))
+    return redirect(url_for('auth.login'))
